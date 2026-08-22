@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dayflow - Profile</title>
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <script src="../api.js"></script>
+    <script src="auth.js"></script>
+</head>
+
+<body data-role="Employee">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">D</div>
+            <h2>Dayflow</h2>
+        </div>
+
+        <p class="role">EMPLOYEE</p>
+
+        <a href="index.html">🏠 Dashboard</a>
+
+        <a href="profile.html" class="active">👤 Profile</a>
+
+        <a href="attendance.html">⏰ Attendance</a>
+
+        <a href="leave.html">📝 Leave</a>
+
+        <a href="payroll.html">💰 Payroll</a>
+
+        <a href="notifications.html">🔔 Notifications</a>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <h1>My Profile</h1>
+
+        <p>View and manage your personal information.</p>
+
+
+        <div class="profile-card">
+
+            <div class="profile-image">
+                👩‍💻
+            </div>
+
+            <h2 id="employeeName">Employee Name</h2>
+
+            <p>Employee ID: <span id="employeeId">EMP001</span></p>
+
+
+            <hr>
+            <label>Name</label>
+            <input type="text" placeholder="Enter your name">
+
+            <label>Email</label>
+            <input type="email" placeholder="Enter your email id">
+
+            <label>Phone</label>
+            <input type="text" placeholder="Enter your phone number">
+
+
+            <label>Address</label>
+            <textarea placeholder="Enter your residential address"></textarea>
+
+
+            <label>Job Title</label>
+            <input type="text" placeholder="Enter your job title (e.g. Software Engineer)" readonly>
+
+
+            <label>Department</label>
+            <input type="text" placeholder="Enter your department (e.g. Engineering)" readonly>
+
+
+            <button onclick="saveProfile()">
+                Save Changes
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        function saveProfile() {
+
+            alert("Profile updated successfully!");
+
+        }
+
+    </script>
+
+</body>
+
+</html><script>
+(async function(){try{const {user}=await dayflowApi.me();const n=document.getElementById('employeeName');const i=document.getElementById('employeeId');if(n)n.textContent=user.name;if(i)i.textContent=user.staff_id||user.staffId;}catch(e){}})();
+</script>

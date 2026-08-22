@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dayflow - HR Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script>
+(function () {
+  const role = localStorage.getItem("dayflowRole");
+  if (role !== "HR") {
+    window.location.replace("../login/login.html");
+    return;
+  }
+  window.dayflowLogout = function () {
+    localStorage.removeItem("dayflowRole");
+    localStorage.removeItem("employeeId");
+    localStorage.removeItem("employeeName");
+    window.location.replace("../login/login.html");
+  };
+})();
+</script>
+</head>
+
+<body data-role="HR">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">D</div>
+            <div>
+                <h2>Dayflow</h2>
+                <span>HRMS</span>
+            </div>
+        </div>
+
+        <nav>
+
+            <button class="nav-item active" onclick="showPage('dashboard', this)">
+                <span>📊</span>
+                Dashboard
+            </button>
+
+            <button class="nav-item" onclick="showPage('employees', this)">
+                <span>👥</span>
+                Employees
+            </button>
+
+            <button class="nav-item" onclick="showPage('attendance', this)">
+                <span>⏰</span>
+                Attendance
+            </button>
+
+            <button class="nav-item" onclick="showPage('leaves', this)">
+                <span>📝</span>
+                Leave Requests
+            </button>
+
+            <button class="nav-item" onclick="showPage('payroll', this)">
+                <span>💰</span>
+                Payroll
+            </button>
+
+            <button class="nav-item" onclick="showPage('reports', this)">
+                <span>📈</span>
+                Reports
+            </button>
+
+        </nav>
+
+        <button class="logout" onclick="logout()">
+            🚪 Logout
+        </button>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+                <h1 id="pageTitle">HR Dashboard</h1>
+                <p>Manage your organization efficiently</p>
+            </div>
+
+            <div class="admin-profile">
+
+                <div class="notification">
+                    🔔
+                    <span>3</span>
+                </div>
+
+                <div class="avatar">
+                    HR
+                </div>
+
+                <div>
+                    <strong>HR Admin</strong>
+                    <small>Administrator</small>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section id="dashboard" class="page active-page">
+
+            <div class="welcome">
+
+                <div>
+                    <h2>Good Morning, HR 👋</h2>
+                    <p>Here is today's workforce overview.</p>
+                </div>
+
+                <button class="primary-btn">
+                    + Add Employee
+                </button>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+
+            <div class="stats">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        👥
+                    </div>
+
+                    <div>
+                        <p>Total Employees</p>
+                        <h2>120</h2>
+                        <small>+8 this month</small>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+                        <p>Present Today</p>
+                        <h2>95</h2>
+                        <small>79% attendance</small>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        🏖️
+                    </div>
+
+                    <div>
+                        <p>On Leave</p>
+                        <h2>10</h2>
+                        <small>8.3% of employees</small>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon red">
+                        ⏳
+                    </div>
+
+                    <div>
+                        <p>Pending Requests</p>
+                        <h2>8</h2>
+                        <small>Needs attention</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DASHBOARD CONTENT -->
+
+            <div class="dashboard-grid">
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <h3>Recent Leave Requests</h3>
+                        <button onclick="showPage('leaves')">
+                            View All
+                        </button>
+                    </div>
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Employee</th>
+                                <th>Leave</th>
+                                <th>Dates</th>
+                                <th>Status</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Arun Kumar</td>
+                                <td>Sick Leave</td>
+                                <td>22 - 23 Aug</td>
+                                <td>
+                                    <span class="badge pending">
+                                        Pending
+                                    </span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Priya S</td>
+                                <td>Paid Leave</td>
+                                <td>25 Aug</td>
+                                <td>
+                                    <span class="badge approved">
+                                        Approved
+                                    </span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Rahul M</td>
+                                <td>Unpaid Leave</td>
+                                <td>28 Aug</td>
+                                <td>
+                                    <span class="badge rejected">
+                                        Rejected
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <h3>Today's Attendance</h3>
+                    </div>
+
+                    <div class="attendance-circle">
+
+                        <div>
+                            <strong>79%</strong>
+                            <span>Present</span>
+                        </div>
+
+                    </div>
+
+                    <div class="attendance-summary">
+
+                        <div>
+                            <span class="dot green-dot"></span>
+                            Present
+                            <strong>95</strong>
+                        </div>
+
+                        <div>
+                            <span class="dot red-dot"></span>
+                            Absent
+                            <strong>15</strong>
+                        </div>
+
+                        <div>
+                            <span class="dot orange-dot"></span>
+                            Leave
+                            <strong>10</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= EMPLOYEES ================= -->
+
+        <section id="employees" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <h2>Employee Management</h2>
+                    <p>View and manage all employees</p>
+                </div>
+
+                <button class="primary-btn">
+                    + Add Employee
+                </button>
+
+            </div>
+
+
+            <div class="toolbar">
+
+                <input
+                    type="text"
+                    id="employeeSearch"
+                    placeholder="🔍 Search employee..."
+                    onkeyup="searchEmployees()"
+                >
+
+                <select>
+                    <option>All Departments</option>
+                    <option>Engineering</option>
+                    <option>HR</option>
+                    <option>Finance</option>
+                    <option>Marketing</option>
+                </select>
+
+            </div>
+
+
+            <div class="panel">
+
+                <table id="employeeTable">
+
+                    <thead>
+
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Job Title</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>EMP001</td>
+                            <td>
+                                <div class="employee-name">
+                                    <div class="mini-avatar">AK</div>
+                                    Arun Kumar
+                                </div>
+                            </td>
+                            <td>Engineering</td>
+                            <td>Software Developer</td>
+                            <td>
+                                <span class="badge active">
+                                    Active
+                                </span>
+                            </td>
+                            <td>
+                                <button class="view-btn">
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>EMP002</td>
+                            <td>
+                                <div class="employee-name">
+                                    <div class="mini-avatar">PS</div>
+                                    Priya S
+                                </div>
+                            </td>
+                            <td>HR</td>
+                            <td>HR Executive</td>
+                            <td>
+                                <span class="badge active">
+                                    Active
+                                </span>
+                            </td>
+                            <td>
+                                <button class="view-btn">
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>EMP003</td>
+                            <td>
+                                <div class="employee-name">
+                                    <div class="mini-avatar">RM</div>
+                                    Rahul M
+                                </div>
+                            </td>
+                            <td>Finance</td>
+                            <td>Accountant</td>
+                            <td>
+                                <span class="badge active">
+                                    Active
+                                </span>
+                            </td>
+                            <td>
+                                <button class="view-btn">
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>EMP004</td>
+                            <td>
+                                <div class="employee-name">
+                                    <div class="mini-avatar">SK</div>
+                                    Sneha K
+                                </div>
+                            </td>
+                            <td>Marketing</td>
+                            <td>Marketing Executive</td>
+                            <td>
+                                <span class="badge inactive">
+                                    Inactive
+                                </span>
+                            </td>
+                            <td>
+                                <button class="view-btn">
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ATTENDANCE ================= -->
+
+        <section id="attendance" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <h2>Attendance Management</h2>
+                    <p>Monitor attendance of all employees</p>
+                </div>
+
+                <input type="date" id="attendanceDate">
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat-card">
+                    <div class="stat-icon green">✓</div>
+                    <div>
+                        <p>Present</p>
+                        <h2>95</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon red">✕</div>
+                    <div>
+                        <p>Absent</p>
+                        <h2>15</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">🏖️</div>
+                    <div>
+                        <p>On Leave</p>
+                        <h2>10</h2>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+                    <h3>Employee Attendance</h3>
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Employee</th>
+                            <th>Check In</th>
+                            <th>Check Out</th>
+                            <th>Working Hours</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>Arun Kumar</td>
+                            <td>09:05 AM</td>
+                            <td>06:02 PM</td>
+                            <td>8h 57m</td>
+                            <td>
+                                <span class="badge approved">
+                                    Present
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Priya S</td>
+                            <td>09:20 AM</td>
+                            <td>06:10 PM</td>
+                            <td>8h 50m</td>
+                            <td>
+                                <span class="badge approved">
+                                    Present
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Rahul M</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>
+                                <span class="badge rejected">
+                                    Absent
+                                </span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= LEAVES ================= -->
+
+        <section id="leaves" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <h2>Leave Requests</h2>
+                    <p>Review and manage employee leave requests</p>
+                </div>
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat-card">
+                    <div class="stat-icon orange">⏳</div>
+                    <div>
+                        <p>Pending</p>
+                        <h2>8</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">✓</div>
+                    <div>
+                        <p>Approved</p>
+                        <h2>42</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon red">✕</div>
+                    <div>
+                        <p>Rejected</p>
+                        <h2>5</h2>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Employee</th>
+                            <th>Leave Type</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Reason</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="leaveTable">
+
+                        <tr>
+                            <td>Arun Kumar</td>
+                            <td>Sick Leave</td>
+                            <td>22 Aug</td>
+                            <td>23 Aug</td>
+                            <td>Medical reason</td>
+                            <td>
+                                <span class="badge pending">
+                                    Pending
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="approve-btn"
+                                    onclick="approveLeave(this)">
+                                    Approve
+                                </button>
+
+                                <button
+                                    class="reject-btn"
+                                    onclick="rejectLeave(this)">
+                                    Reject
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>Priya S</td>
+                            <td>Paid Leave</td>
+                            <td>25 Aug</td>
+                            <td>25 Aug</td>
+                            <td>Personal</td>
+                            <td>
+                                <span class="badge pending">
+                                    Pending
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="approve-btn"
+                                    onclick="approveLeave(this)">
+                                    Approve
+                                </button>
+
+                                <button
+                                    class="reject-btn"
+                                    onclick="rejectLeave(this)">
+                                    Reject
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PAYROLL ================= -->
+
+        <section id="payroll" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <h2>Payroll Management</h2>
+                    <p>Manage employee salary information</p>
+                </div>
+
+                <button class="primary-btn">
+                    + Generate Payroll
+                </button>
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        ₹
+                    </div>
+
+                    <div>
+                        <p>Total Payroll</p>
+                        <h2>₹42.5L</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        ✓
+                    </div>
+
+                    <div>
+                        <p>Processed</p>
+                        <h2>115</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        ⏳
+                    </div>
+
+                    <div>
+                        <p>Pending</p>
+                        <h2>5</h2>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Employee</th>
+                            <th>Basic Salary</th>
+                            <th>Allowances</th>
+                            <th>Deductions</th>
+                            <th>Net Salary</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>EMP001</td>
+                            <td>Arun Kumar</td>
+                            <td>₹40,000</td>
+                            <td>₹5,000</td>
+                            <td>₹2,000</td>
+                            <td><strong>₹43,000</strong></td>
+                            <td>
+                                <button class="view-btn">
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>EMP002</td>
+                            <td>Priya S</td>
+                            <td>₹35,000</td>
+                            <td>₹4,000</td>
+                            <td>₹1,500</td>
+                            <td><strong>₹37,500</strong></td>
+                            <td>
+                                <button class="view-btn">
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>EMP003</td>
+                            <td>Rahul M</td>
+                            <td>₹32,000</td>
+                            <td>₹3,500</td>
+                            <td>₹1,200</td>
+                            <td><strong>₹34,300</strong></td>
+                            <td>
+                                <button class="view-btn">
+                                    View
+                                </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= REPORTS ================= -->
+
+        <section id="reports" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <h2>Reports & Analytics</h2>
+                    <p>View organization performance reports</p>
+                </div>
+
+                <button class="primary-btn">
+                    Download Report
+                </button>
+
+            </div>
+
+
+            <div class="report-grid">
+
+                <div class="report-card">
+
+                    <h3>Attendance Report</h3>
+
+                    <div class="chart">
+
+                        <div class="bar" style="height:80%">
+                            <span>Mon</span>
+                        </div>
+
+                        <div class="bar" style="height:90%">
+                            <span>Tue</span>
+                        </div>
+
+                        <div class="bar" style="height:70%">
+                            <span>Wed</span>
+                        </div>
+
+                        <div class="bar" style="height:95%">
+                            <span>Thu</span>
+                        </div>
+
+                        <div class="bar" style="height:85%">
+                            <span>Fri</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="report-card">
+
+                    <h3>Leave Statistics</h3>
+
+                    <div class="leave-chart">
+
+                        <div class="pie"></div>
+
+                        <div class="legend">
+
+                            <p>
+                                <span class="dot green-dot"></span>
+                                Paid Leave
+                            </p>
+
+                            <p>
+                                <span class="dot orange-dot"></span>
+                                Sick Leave
+                            </p>
+
+                            <p>
+                                <span class="dot red-dot"></span>
+                                Unpaid Leave
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="../api.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
