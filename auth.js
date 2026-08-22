@@ -1,8 +1,8 @@
 (function () {
     const role = localStorage.getItem("dayflowRole");
 
-    // Employee pages can only be opened by an Employee login.
-    if (role !== "Employee") {
+    // HR pages can only be opened by an HR login.
+    if (role !== "HR") {
         window.location.replace("../login/login.html");
         return;
     }
