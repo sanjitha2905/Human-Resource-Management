@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dayflow - Payroll</title>
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <script src="../api.js"></script>
+    <script src="auth.js"></script>
+</head>
+
+<body data-role="Employee">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">D</div>
+            <h2>Dayflow</h2>
+        </div>
+
+        <p class="role">EMPLOYEE</p>
+
+        <a href="index.html">🏠 Dashboard</a>
+        <a href="profile.html">👤 Profile</a>
+        <a href="attendance.html">⏰ Attendance</a>
+        <a href="leave.html">📝 Leave</a>
+        <a href="payroll.html" class="active">💰 Payroll</a>
+        <a href="notifications.html">🔔 Notifications</a>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <h1>My Payroll</h1>
+
+        <p>View your salary details and salary slip.</p>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div>
+                    <p>Basic Salary</p>
+                    <h2>₹30,000</h2>
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div>
+                    <p>Allowances</p>
+                    <h2>₹5,000</h2>
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div>
+                    <p>Deductions</p>
+                    <h2>₹2,000</h2>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-card">
+
+            <h2>Salary Summary</h2>
+
+            <br>
+
+            <p>Basic Salary: ₹30,000</p>
+
+            <p>Allowances: ₹5,000</p>
+
+            <p>Deductions: ₹2,000</p>
+
+            <hr>
+
+            <h2>Net Salary: ₹33,000</h2>
+
+            <button onclick="salarySlip()">
+                View Salary Slip
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <script>
+async function loadPayroll(){try{const data=await dayflowApi.myPayroll(); if(data.payroll.length){const p=data.payroll[0]; const cards=document.querySelectorAll('.card h2'); if(cards[0])cards[0].innerText='₹'+Number(p.basicSalary).toLocaleString('en-IN'); if(cards[1])cards[1].innerText='₹'+Number(p.allowances).toLocaleString('en-IN'); if(cards[2])cards[2].innerText='₹'+Number(p.deductions).toLocaleString('en-IN'); const h=document.querySelector('.profile-card h2:last-of-type'); if(h)h.innerText='Net Salary: ₹'+Number(p.netSalary).toLocaleString('en-IN');}}catch(e){console.error(e)}}
+function salarySlip(){alert('Salary slip will be generated here.')}
+loadPayroll();
+</script>
+
+</body>
+
+</html>

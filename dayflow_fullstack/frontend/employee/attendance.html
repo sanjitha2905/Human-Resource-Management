@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dayflow - Attendance</title>
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <script src="../api.js"></script>
+    <script src="auth.js"></script>
+</head>
+
+<body data-role="Employee">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">D</div>
+            <h2>Dayflow</h2>
+        </div>
+
+        <p class="role">EMPLOYEE</p>
+
+        <a href="index.html">🏠 Dashboard</a>
+        <a href="profile.html">👤 Profile</a>
+        <a href="attendance.html" class="active">⏰ Attendance</a>
+        <a href="leave.html">📝 Leave</a>
+        <a href="payroll.html">💰 Payroll</a>
+        <a href="notifications.html">🔔 Notifications</a>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <h1>Attendance</h1>
+
+        <p>Track your daily and weekly attendance.</p>
+
+
+        <div class="attendance-actions">
+
+            <div class="card">
+
+                <h3>Today's Attendance</h3>
+
+                <p id="status">Not Checked In</p>
+
+                <button onclick="checkIn()">
+                    Check In
+                </button>
+
+                <button onclick="checkOut()">
+                    Check Out
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <section class="section">
+
+            <h2>Attendance History</h2>
+
+            <table class="data-table">
+
+                <tr>
+                    <th>Date</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td>22 Aug 2026</td>
+                    <td>09:10 AM</td>
+                    <td>06:00 PM</td>
+                    <td>Present</td>
+                </tr>
+
+                <tr>
+                    <td>21 Aug 2026</td>
+                    <td>09:15 AM</td>
+                    <td>06:05 PM</td>
+                    <td>Present</td>
+                </tr>
+
+                <tr>
+                    <td>20 Aug 2026</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Leave</td>
+                </tr>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    
+
+</body>
+
+</html><script>
+async function refreshAttendance(){
+  try{
+    const data=await dayflowApi.myAttendance();
+    const table=document.querySelector('.data-table'); if(!table) return;
+    const rows=data.attendance.map(a=>`<tr><td>${a.date}</td><td>${a.checkIn?new Date(a.checkIn).toLocaleTimeString(): '-'}</td><td>${a.checkOut?new Date(a.checkOut).toLocaleTimeString(): '-'}</td><td>${a.status}</td></tr>`).join('');
+    table.innerHTML='<tr><th>Date</th><th>Check In</th><th>Check Out</th><th>Status</th></tr>'+rows;
+  }catch(e){console.error(e)}
+}
+async function checkIn(){try{const r=await dayflowApi.checkIn();document.getElementById('status').innerText='Checked In at '+new Date(r.time).toLocaleTimeString();refreshAttendance();}catch(e){alert(e.message)}}
+async function checkOut(){try{const r=await dayflowApi.checkOut();document.getElementById('status').innerText='Checked Out at '+new Date(r.time).toLocaleTimeString();refreshAttendance();}catch(e){alert(e.message)}}
+refreshAttendance();
+</script>

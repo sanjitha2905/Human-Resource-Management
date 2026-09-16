@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dayflow Login</title>
+
+    <link rel="stylesheet"
+          href="login.css">
+
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <!-- LEFT SIDE -->
+
+        <div class="login-left">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    D
+                </div>
+
+                <div>
+                    <h2>Dayflow</h2>
+                    <span>HRMS</span>
+                </div>
+
+            </div>
+
+
+            <div class="welcome">
+
+                <h1>
+                    Welcome to Dayflow
+                </h1>
+
+                <p>
+                    Manage your workplace,
+                    attendance and people
+                    in one simple platform.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="login-right">
+
+            <div class="login-box">
+
+                <h1>Sign In</h1>
+
+                <p class="subtitle">
+                    Select your role to continue
+                </p>
+
+
+                <!-- ROLE SELECT -->
+
+                <div class="role-selection">
+
+                    <button
+                        class="role-btn active"
+                        id="hrBtn"
+                        onclick="selectRole('HR')">
+
+                        <span>👨‍💼</span>
+
+                        <div>
+                            <strong>HR</strong>
+                            <small>Administrator</small>
+                        </div>
+
+                    </button>
+
+
+                    <button
+                        class="role-btn"
+                        id="employeeBtn"
+                        onclick="selectRole('Employee')">
+
+                        <span>👨‍💻</span>
+
+                        <div>
+                            <strong>Employee</strong>
+                            <small>Staff Member</small>
+                        </div>
+
+                    </button>
+
+                </div>
+
+
+                <!-- LOGIN FORM -->
+
+                <form onsubmit="login(event)">
+
+                    <label id="idLabel">
+                        HR Staff ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="staffId"
+                        placeholder="Enter HR Staff ID"
+                        required
+                    >
+
+
+                    <label>
+                        Date of Birth
+                    </label>
+
+                    <input
+                        type="date"
+                        id="dob"
+                        required
+                    >
+
+
+                    <button
+                        type="submit"
+                        class="login-btn">
+
+                        Login →
+
+                    </button>
+
+                </form>
+
+
+                <!-- ERROR MESSAGE -->
+
+                <p id="message"></p>
+
+
+                <!-- DEMO DETAILS -->
+
+                <div class="demo-box">
+
+                    <strong>Demo Login</strong>
+
+                    <p id="demoText">
+                        HR ID: HR001<br>
+                        DOB: 1990-05-15
+                    </p>
+
+                </div>
+
+
+                <p class="footer-text">
+                    Dayflow HRMS • Secure Workplace Management
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="../api.js"></script>
+    <script src="login.js"></script>
+
+</body>
+
+</html>

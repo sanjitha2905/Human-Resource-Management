@@ -1,0 +1,27 @@
+require('dotenv').config();
+const express=require('express');
+const cors=require('cors');
+const path=require('path');
+require('./db');
+const auth=require('./routes/auth');
+const employees=require('./routes/employees');
+const attendance=require('./routes/attendance');
+const leaves=require('./routes/leaves');
+const payroll=require('./routes/payroll');
+
+const app=express();
+const PORT=Number(process.env.PORT||3000);
+const frontendOrigin=process.env.FRONTEND_ORIGIN||'http://127.0.0.1:5500';
+app.use(cors({origin:frontendOrigin,credentials:false}));
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.get('/api/health',(req,res)=>res.json({ok:true,service:'Dayflow HRMS API'}));
+app.use('/api/auth',auth);
+app.use('/api/employees',employees);
+app.use('/api/attendance',attendance);
+app.use('/api/leaves',leaves);
+app.use('/api/payroll',payroll);
+app.use(express.static(path.join(__dirname,'..','frontend')));
+app.get('/',(req,res)=>res.sendFile(path.join(__dirname,'..','frontend','index.html')));
+app.use((err,req,res,next)=>{console.error(err);res.status(500).json({message:'Internal server error'});});
+app.listen(PORT,()=>console.log(`Dayflow backend running at http://localhost:${PORT}`));

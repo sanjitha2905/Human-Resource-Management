@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dayflow - Leave</title>
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <script src="../api.js"></script>
+    <script src="auth.js"></script>
+</head>
+
+<body data-role="Employee">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">D</div>
+            <h2>Dayflow</h2>
+        </div>
+
+        <p class="role">EMPLOYEE</p>
+
+        <a href="index.html">🏠 Dashboard</a>
+        <a href="profile.html">👤 Profile</a>
+        <a href="attendance.html">⏰ Attendance</a>
+        <a href="leave.html" class="active">📝 Leave</a>
+        <a href="payroll.html">💰 Payroll</a>
+        <a href="notifications.html">🔔 Notifications</a>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <h1>Leave Management</h1>
+
+        <p>Apply for leave and view your leave requests.</p>
+
+
+        <div class="profile-card">
+
+            <h2>Apply for Leave</h2>
+
+
+            <label>Leave Type</label>
+
+            <select id="leaveType">
+
+                <option>Paid Leave</option>
+                <option>Sick Leave</option>
+                <option>Unpaid Leave</option>
+
+            </select>
+
+
+            <label>Start Date</label>
+
+            <input type="date" id="startDate">
+
+
+            <label>End Date</label>
+
+            <input type="date" id="endDate">
+
+
+            <label>Remarks</label>
+
+            <textarea
+                id="remarks"
+                placeholder="Enter reason for leave">
+            </textarea>
+
+
+            <button onclick="applyLeave()">
+                Submit Leave Request
+            </button>
+
+        </div>
+
+
+        <section class="section">
+
+            <h2>My Leave Requests</h2>
+
+            <table class="data-table">
+
+                <tr>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Remarks</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td>Paid Leave</td>
+                    <td>25 Aug - 26 Aug</td>
+                    <td>Personal work</td>
+                    <td>Pending</td>
+                </tr>
+
+                <tr>
+                    <td>Sick Leave</td>
+                    <td>10 Aug</td>
+                    <td>Not feeling well</td>
+                    <td>Approved</td>
+                </tr>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <script>
+async function applyLeave(){
+  const leaveType=document.getElementById('leaveType').value;
+  const startDate=document.getElementById('startDate').value;
+  const endDate=document.getElementById('endDate').value;
+  const remarks=document.getElementById('remarks').value.trim();
+  if(!startDate||!endDate){alert('Please select the leave dates.');return;}
+  try{await dayflowApi.createLeave({leaveType,startDate,endDate,remarks});alert('Leave request submitted successfully!');document.getElementById('remarks').value='';loadLeaves();}
+  catch(e){alert(e.message)}
+}
+async function loadLeaves(){
+  try{const data=await dayflowApi.myLeaves(); const table=document.querySelector('.data-table'); if(!table)return; const rows=data.leaves.map(l=>`<tr><td>${l.leaveType}</td><td>${l.startDate} - ${l.endDate}</td><td>${l.remarks||''}</td><td>${l.status}</td></tr>`).join(''); table.innerHTML='<tr><th>Type</th><th>Date</th><th>Remarks</th><th>Status</th></tr>'+rows;}catch(e){console.error(e)}}
+loadLeaves();
+</script>
+
+</body>
+
+</html>

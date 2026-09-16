@@ -1,0 +1,629 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #F8F4ED;
+    color: #4A3B2A;
+}
+
+
+/* ==============================
+   SIDEBAR
+================================= */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 240px;
+    height: 100vh;
+
+    background: #D8C3A5;
+    color: #4A3B2A;
+
+    padding: 25px 15px;
+
+    box-shadow: 2px 0 10px rgba(74, 59, 42, 0.08);
+}
+
+
+/* LOGO */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 0 10px;
+    margin-bottom: 30px;
+}
+
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+
+    background: #FFFFFF;
+    color: #806B54;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+    font-weight: bold;
+}
+
+
+.logo h2 {
+    font-size: 24px;
+    color: #4A3B2A;
+}
+
+
+/* ROLE */
+
+.role {
+    font-size: 11px;
+    color: #806B54;
+
+    margin: 10px;
+}
+
+
+/* SIDEBAR LINKS */
+
+.sidebar a {
+    display: block;
+
+    text-decoration: none;
+    color: #5E4C38;
+
+    padding: 13px 15px;
+
+    border-radius: 8px;
+
+    margin: 5px 0;
+
+    transition: 0.2s;
+}
+
+
+/* HOVER + ACTIVE */
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: #FFFFFF;
+    color: #806B54;
+
+    box-shadow: 0 2px 8px rgba(74, 59, 42, 0.08);
+}
+
+
+/* LOGOUT */
+
+.sidebar .logout {
+    margin-top: 30px;
+}
+
+
+/* ==============================
+   MAIN CONTENT
+================================= */
+
+.main-content {
+    margin-left: 240px;
+
+    padding: 35px;
+
+    background: #F8F4ED;
+
+    min-height: 100vh;
+}
+
+
+/* ==============================
+   TOP BAR
+================================= */
+
+.topbar {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+
+.topbar h1 {
+    font-size: 28px;
+
+    margin-bottom: 5px;
+
+    color: #4A3B2A;
+}
+
+
+.topbar p {
+    color: #806B54;
+}
+
+
+/* SMALL PROFILE */
+
+.profile-small {
+    width: 45px;
+    height: 45px;
+
+    background: #FFFFFF;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 23px;
+
+    box-shadow:
+        0 3px 10px
+        rgba(74, 59, 42, 0.08);
+}
+
+
+/* ==============================
+   CARDS
+================================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 35px;
+}
+
+
+.card {
+    background: #FFFFFF;
+
+    padding: 25px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    box-shadow:
+        0 3px 12px
+        rgba(74, 59, 42, 0.07);
+
+    border: 1px solid #EFE4D2;
+}
+
+
+.card p {
+    color: #806B54;
+
+    font-size: 14px;
+
+    margin-bottom: 8px;
+}
+
+
+.card h2 {
+    font-size: 24px;
+
+    color: #4A3B2A;
+}
+
+
+/* CARD ICON */
+
+.card-icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 24px;
+}
+
+
+/* SANDAL ICON COLORS */
+
+.blue {
+    background: #EFE4D2;
+}
+
+
+.green {
+    background: #E8DDCC;
+}
+
+
+.purple {
+    background: #E4D8C8;
+}
+
+
+/* ==============================
+   SECTIONS
+================================= */
+
+.section {
+    margin-bottom: 30px;
+}
+
+
+.section h2 {
+    margin-bottom: 15px;
+
+    color: #4A3B2A;
+}
+
+
+/* ==============================
+   QUICK ACTIONS
+================================= */
+
+.quick-actions {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+
+.quick-actions a {
+    background: #FFFFFF;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    color: #5E4C38;
+
+    box-shadow:
+        0 3px 12px
+        rgba(74, 59, 42, 0.06);
+
+    border: 1px solid #EFE4D2;
+
+    transition: 0.2s;
+}
+
+
+.quick-actions a:hover {
+    transform: translateY(-3px);
+
+    background: #FFFDFC;
+
+    box-shadow:
+        0 6px 15px
+        rgba(74, 59, 42, 0.10);
+}
+
+
+.quick-actions span {
+    display: block;
+
+    font-size: 25px;
+
+    margin-bottom: 10px;
+}
+
+
+/* ==============================
+   ACTIVITY
+================================= */
+
+.activity {
+    background: #FFFFFF;
+
+    padding: 18px 20px;
+
+    margin-bottom: 10px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    box-shadow:
+        0 2px 8px
+        rgba(74, 59, 42, 0.05);
+
+    border-left: 4px solid #D8C3A5;
+}
+
+
+.activity p {
+    color: #806B54;
+
+    margin-top: 5px;
+}
+
+
+.activity span {
+    color: #A28F78;
+
+    font-size: 13px;
+}
+
+
+/* ==============================
+   PROFILE PAGE
+================================= */
+
+.profile-card {
+    background: #FFFFFF;
+
+    padding: 30px;
+
+    margin-top: 25px;
+
+    border-radius: 15px;
+
+    max-width: 700px;
+
+    box-shadow:
+        0 3px 12px
+        rgba(74, 59, 42, 0.07);
+
+    border: 1px solid #EFE4D2;
+}
+
+
+.profile-image {
+    width: 90px;
+    height: 90px;
+
+    background: #EFE4D2;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 40px;
+
+    margin-bottom: 15px;
+}
+
+
+.profile-card label {
+    display: block;
+
+    margin-top: 15px;
+    margin-bottom: 6px;
+
+    font-weight: bold;
+
+    color: #5E4C38;
+}
+
+
+.profile-card input,
+.profile-card textarea {
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid #E5D8C5;
+
+    border-radius: 7px;
+
+    background: #FFFDFC;
+
+    color: #4A3B2A;
+
+    font-size: 14px;
+
+    outline: none;
+}
+
+
+.profile-card input:focus,
+.profile-card textarea:focus {
+    border-color: #B89B76;
+
+    box-shadow:
+        0 0 0 3px #F2E9DC;
+}
+
+
+.profile-card textarea {
+    height: 90px;
+
+    resize: vertical;
+}
+
+
+/* PROFILE BUTTON */
+
+.profile-card button {
+    margin-top: 20px;
+
+    padding: 12px 22px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #B89B76;
+
+    color: #FFFFFF;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+.profile-card button:hover {
+    background: #8F7658;
+}
+
+
+/* ==============================
+   DATA TABLE
+================================= */
+
+.data-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: #FFFFFF;
+
+    margin-top: 20px;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 3px 12px
+        rgba(74, 59, 42, 0.06);
+}
+
+
+.data-table th,
+.data-table td {
+    padding: 15px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #EFE4D2;
+}
+
+
+.data-table th {
+    background: #EFE4D2;
+
+    color: #5E4C38;
+}
+
+
+.data-table td {
+    color: #6B5A47;
+}
+
+
+.data-table tr:hover {
+    background: #FCFAF6;
+}
+
+
+/* ==============================
+   ATTENDANCE
+================================= */
+
+.attendance-actions {
+    margin-top: 25px;
+}
+
+
+.attendance-actions button {
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #B89B76;
+
+    color: #FFFFFF;
+
+    cursor: pointer;
+
+    margin-right: 10px;
+
+    font-weight: bold;
+}
+
+
+.attendance-actions button:hover {
+    background: #8F7658;
+}
+
+
+/* ==============================
+   MOBILE
+================================= */
+
+@media (max-width: 900px) {
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-actions {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        width: 70px;
+    }
+
+    .sidebar h2,
+    .sidebar .role {
+        display: none;
+    }
+
+    .sidebar a {
+        font-size: 0;
+
+        text-align: center;
+    }
+
+    .sidebar a:first-letter {
+        font-size: 20px;
+    }
+
+    .main-content {
+        margin-left: 70px;
+
+        padding: 20px;
+    }
+
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+
+}
